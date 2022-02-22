@@ -1,4 +1,4 @@
-# ocd
+# OCD Mobile Application
 
 A new Flutter application.
 
