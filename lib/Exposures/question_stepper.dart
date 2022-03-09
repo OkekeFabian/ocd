@@ -76,8 +76,8 @@ class _QuestionPageState extends State<QuestionPage> {
                 onStepTapped: (step) => tapped(step),
                 onStepContinue: continued,
                 onStepCancel: cancel,
-                controlsBuilder: (BuildContext context,
-                    {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
+                controlsBuilder:
+                    (BuildContext context, ControlsDetails controls) {
                   final isLastStep = _currentStep == 6;
                   return Container(
                     margin: EdgeInsets.only(top: 50),
@@ -86,7 +86,7 @@ class _QuestionPageState extends State<QuestionPage> {
                         Expanded(
                             child: ElevatedButton(
                           child: Text(isLastStep ? 'Save' : 'Next'),
-                          onPressed: onStepContinue,
+                          onPressed: controls.onStepContinue,
                         )),
                         const SizedBox(
                           width: 12,
@@ -95,7 +95,7 @@ class _QuestionPageState extends State<QuestionPage> {
                           Expanded(
                               child: ElevatedButton(
                             child: Text('Back'),
-                            onPressed: onStepCancel,
+                            onPressed: controls.onStepCancel,
                           )),
                       ],
                     ),

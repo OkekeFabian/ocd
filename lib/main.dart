@@ -4,6 +4,8 @@ import 'package:ocd/About/about_main.dart';
 import 'package:ocd/word.dart';
 
 import 'About/detail_page.dart';
+import 'const.dart';
+import 'custom_clipper.dart';
 import 'first_slider.dart';
 
 void main() => runApp(const MyApp());
@@ -35,25 +37,65 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
+    double statusBarHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
-      backgroundColor: Colors.purple,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20,
+      backgroundColor: Constants.backgroundColor,
+      body: Stack(
+        children: [
+          ClipPath(
+            clipper: MyCustomClipper(clipType: ClipType.bottom),
+            child: Container(
+              color: Theme.of(context).accentColor,
+              height: Constants.headerHeight + statusBarHeight,
             ),
-            //Word(),
-            //Page1(),
-            MainPageSlider(),
-          ],
-        ),
+          ),
+          Positioned(
+            right: -45,
+            top: -30,
+            child: ClipOval(
+              child: Container(
+                color: Colors.black.withOpacity(0.05),
+                height: 220,
+                width: 220,
+              ),
+            ),
+          ),
+          Padding(
+          padding: EdgeInsets.all(Constants.paddingSide),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: const [
+                  Expanded(
+                    child: Text(
+                      "Good Morning,\nPatient",
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white),
+                    ),
+                  ),
+                  CircleAvatar(
+                      radius: 35.0,
+                      backgroundImage:
+                      AssetImage('assets/profile_picture.png'))
+                ],
+              ),
+              //Word(),
+              //Page1(),
+              const MainPageSlider(),
+            ],
+          ),
+        ),]
       ),
       floatingActionButton: ElevatedButton.icon(
-        label: Text('Click to know about App'),
-        icon: Icon(Icons.announcement),
+        label: const Text('Click to know about App'),
+        icon: const Icon(Icons.announcement),
         style: ElevatedButton.styleFrom(
-          primary: Colors.red, // background
+          primary: Colors.blue, // background
           onPrimary: Colors.white, // foreground
         ),
         onPressed: () {

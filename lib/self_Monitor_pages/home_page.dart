@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../Exposures/situation_collector.dart';
 import 'situation_class.dart';
 import 'situation_entry_dialog.dart';
 import 'situation_list_item.dart';
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (buildContext, index) {
                     return InkWell(
                         onTap: () => _editEntry(weightSaves[index]),
-                        child: WeightListItem(weightSaves[index]));
+                        child: WeightListItem(weightSaves[index], index + 1));
                   },
                 ),
           Row(
@@ -98,8 +99,15 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
+          const SizedBox(
+            height: 10,
+          ),
           ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const SituationPage()),
+                );
+              },
               child: const Text('Know your OCD section',
                   style: TextStyle(color: Colors.white, fontSize: 15))),
         ],
@@ -145,7 +153,9 @@ class _HomePageState extends State<HomePage> {
         await Navigator.of(context).push(MaterialPageRoute<WeightEntry>(
             builder: (BuildContext context) {
               return WeightEntryDialog.add(
-                  weightSaves.isNotEmpty ? weightSaves.last.weight : 0);
+                  weightSaves.isNotEmpty ? weightSaves.last.weight : 0
+
+              );
             },
             fullscreenDialog: true));
     if (save != null) {

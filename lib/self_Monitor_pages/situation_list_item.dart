@@ -2,74 +2,115 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 //import 'package:weight_tracker/model/weight_entry.dart';
 
+import '../const.dart';
+import '../custom_clipper.dart';
 import 'situation_class.dart';
 
 class WeightListItem extends StatelessWidget {
   final WeightEntry weightEntry;
+  final int index;
 
   WeightListItem(
     this.weightEntry,
+      this.index,
   );
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      height: 100,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        shape: BoxShape.rectangle,
+        color: Colors.white,
+      ),
+      child: Stack(
+        children: <Widget>[
+          Positioned(
+            child: ClipPath(
+              clipper: MyCustomClipper(clipType: ClipType.halfCircle),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  color: Colors.blue.withOpacity(0.1),
+                ),
+                height: 100,
+                width: 100,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                // Icon and Hearbea
+                Text(
+                  index.toString()+'.',
+                  textScaleFactor: 2.0,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(width: 30),
                 Expanded(
-                  child: Row(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Column(
-                        children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
                           Text(
                             DateFormat.MMMEd().format(weightEntry.dateTime),
-                            textScaleFactor: 1.5,
-                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Constants.textPrimary),
                           ),
                           Text(
                             TimeOfDay.fromDateTime(weightEntry.dateTime)
                                 .toString(),
-                            textScaleFactor: 1.0,
-                            textAlign: TextAlign.right,
                             style: TextStyle(
-                              color: Colors.grey,
-                            ),
+                                fontSize: 15, color: Constants.textPrimary),
                           ),
                         ],
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
                       ),
-                      (weightEntry.note == null || weightEntry.note.isEmpty)
-                          ? Container(
-                              height: 0.0,
-                            )
-                          : Padding(
-                              padding: EdgeInsets.only(left: 4.0),
-                              child: Icon(
-                                Icons.speaker_notes,
-                                color: Colors.grey[300],
-                                size: 16.0,
-                              ),
-                            ),
+                      SizedBox(height: 15),
+                      Container(
+                        height: 6,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          shape: BoxShape.rectangle,
+                          color: Color(0xFFD9E2EC),
+                        ),
+                        child: LayoutBuilder(builder:
+                            (BuildContext context, BoxConstraints constraints) {
+                          return Stack(
+                            children: [
+                              Positioned(
+                                left: 0,
+                                child: Container(
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      shape: BoxShape.rectangle,
+                                      color: Colors.redAccent,
+                                    ),
+                                    width: constraints.maxWidth * (weightEntry.weight / 10),
+                                    height: 6),
+                              )
+                            ],
+                          );
+                        }),
+                      ),
                     ],
                   ),
-                ),
-                Text(
-                  weightEntry.weight.toString(),
-                  textScaleFactor: 2.0,
-                  textAlign: TextAlign.center,
-                ),
+                )
               ],
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

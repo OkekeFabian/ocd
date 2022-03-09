@@ -106,7 +106,7 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - assets/Tug_of_war_with_a_Monster.mp4
-    - assets/
+    - assets/profile_picture.png
     - assets/disgust.png
     - assets/fear.png
     - assets/thought.jpg

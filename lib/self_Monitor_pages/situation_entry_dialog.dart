@@ -127,8 +127,13 @@ class WeightEntryDialogState extends State<WeightEntryDialog> {
                       ),
                     ),
                     onSelected: (String value) {
-                      _weight = int.parse(value);
+
+                      setState(() {
+                        _weight = int.parse(value);
+
+                      });
                     },
+
                     itemBuilder: (context) {
                       return topicOptions
                           .map<PopupMenuItem<String>>((String value) {

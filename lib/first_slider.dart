@@ -16,12 +16,12 @@ class _MainPageSliderState extends State<MainPageSlider> {
     if (index == 1) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => OnboardingScreen1()),
+        MaterialPageRoute(builder: (context) => const OnboardingScreen1()),
       );
     } else {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => OnboardingScreen()),
+        MaterialPageRoute(builder: (context) => const OnboardingScreen()),
       );
     }
   }
@@ -77,17 +77,22 @@ class _MainPageSliderState extends State<MainPageSlider> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        areas[index].description ?? '',
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontFamily: 'Avenir',
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            areas[index].description ?? '',
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontFamily: 'Avenir',
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
                         ),
-                        textAlign: TextAlign.left,
                       ),
                       const SizedBox(
                         height: 10,
