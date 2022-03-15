@@ -3,7 +3,6 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ocd/Exposures/situation_collector.dart';
 import 'package:ocd/General%20Information/main_page.dart';
-import 'package:splashscreen/splashscreen.dart';
 
 import 'exposure_data.dart';
 

@@ -43,12 +43,11 @@ dependencies:
   keyboard_dismisser: ^1.0.2
   intl:
   websafe_svg:
-  lottie:
   introduction_screen: ^2.1.0
   dots_indicator: ^2.0.0
   numberpicker: ^2.1.1
   font_awesome_flutter:
-  splashscreen:
+  lottie: ^1.2.2
 
 dev_dependencies:
   flutter_swiper:
