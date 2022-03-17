@@ -2,7 +2,7 @@
 
 This project covers specifically Contamination OCD, this is when an individual obsesses over contracting an illness or spreading germs. Contamination itself is an intense feeling of having been polluted after having direct or indirect contact with a person, object that they perceive or deem to be soiled, harmful or impure. It is commonly accompanied by disgust, fear, shame, moral impunity and dirtiness.
 
-An application like this would help Professionals with having and knowing details about patients in situations when they experience their obsession. Patients together with Professionals will also be able keep track of their situation and progress and then discuss or work on it together at various points of treatment.
+An application to help Professionals with having and knowing details about patients OCD situations by gathering data about their obsessive situations using important questions. It also helps track users when they experience their obsession and with this patients together with Professionals will also be able keep track of their situation and progress and then discuss or work on it together at various points of treatment. Users also get to see information about important terms in OCD.
 
 The App comprises of two main sections:
 
