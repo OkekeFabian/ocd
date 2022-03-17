@@ -11,23 +11,26 @@ The App comprises of two main sections:
 
 Usage Pathways:
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.5\textwidth]{assets/Comb_intro.png}
-\caption{A pathway from the home screen to the General Information section that covers the explanation of relevant OCD terms with the addition of pictorial information.}
-\label{fig:comb_intro}
-\end{figure}
+![A pathway from the home screen to the General Information section that covers the explanation of relevant OCD terms with the addition of pictorial information.](assets/Comb_intro.png)
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.5\textwidth]{assets/comb_intro1.png}
-\caption{A pathway from the home screen to filling in a situation with topic and then proceeding to answering the stepper questions. The answered round is then saved and displayed on the situation page for the user to access at any time.}
-\label{fig:comb_intro1}
-\end{figure}
+<p align = "center">
+<img src = "assets/Comb_intro.png">
+</p>
+<p align = "center">
+Fig.1 - A pathway from the home screen to the General Information section that covers the explanation of relevant OCD terms with the addition of pictorial information.
+</p>
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.5\textwidth]{assets/combo_self.png}
-\caption{A pathway from the home screen to filling in a situation right after an obsession occurs and the questions to be answered with the situation displayed in a list so it can be accessed when needed.}
-\label{fig:combo_self}
-\end{figure}
+<p align = "center">
+<img src = "assets/comb_intro1.png">
+</p>
+<p align = "center">
+Fig.2 - A pathway from the home screen to filling in a situation with topic and then proceeding to answering the stepper questions. The answered round is then saved and displayed on the situation page for the user to access at any time.
+</p>
+
+<p align = "center">
+<img src = "assets/combo_self.png">
+</p>
+<p align = "center">
+Fig.2 - A pathway from the home screen to filling in a situation right after an obsession occurs and the questions to be answered with the situation displayed in a list so it can be accessed when needed.
+</p>
+
