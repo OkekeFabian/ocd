@@ -11,8 +11,6 @@ The App comprises of two main sections:
 
 Usage Pathways:
 
-![A pathway from the home screen to the General Information section that covers the explanation of relevant OCD terms with the addition of pictorial information.](assets/Comb_intro.png)
-
 <p align = "center">
 <img src = "assets/Comb_intro.png">
 </p>
@@ -31,6 +29,6 @@ Fig.2 - A pathway from the home screen to filling in a situation with topic and 
 <img src = "assets/combo_self.png">
 </p>
 <p align = "center">
-Fig.2 - A pathway from the home screen to filling in a situation right after an obsession occurs and the questions to be answered with the situation displayed in a list so it can be accessed when needed.
+Fig.3 - A pathway from the home screen to filling in a situation right after an obsession occurs and the questions to be answered with the situation displayed in a list so it can be accessed when needed.
 </p>
 
