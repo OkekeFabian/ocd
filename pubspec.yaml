@@ -104,33 +104,6 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
-    - assets/Tug_of_war_with_a_Monster.mp4
-    - assets/profile_picture.png
-    - assets/disgust.png
-    - assets/fear.png
-    - assets/thought.jpg
-    - assets/obsession.png
-    - assets/ritual.png
-    - assets/thought2.png
-    - assets/drop_down_icon.png
+    - assets/
     - assets/extra_images/
-    - assets/extra_images/disgust_1.jpeg
-    - assets/extra_images/disgust_2.jpeg
-    - assets/extra_images/disgust_3.jpeg
-    - assets/extra_images/fear_1.jpeg
-    - assets/extra_images/fear_2.jpeg
-    - assets/extra_images/fear_3.jpeg
-    - assets/extra_images/fear_4.jpeg
-    - assets/extra_images/fear_5.jpeg
-    - assets/extra_images/obsession_1.jpeg
-    - assets/extra_images/obsession_2.jpeg
-    - assets/extra_images/ritual_1.jpeg
-    - assets/extra_images/ritual_2.jpeg
-    - assets/extra_images/ritual_3.jpeg
-    - assets/extra_images/ritual_4.jpeg
-    - assets/extra_images/thought_1.png
-    - assets/extra_images/thought_2.jpeg
-    - assets/extra_images/thought_3.jpeg
-    - assets/Comb_intro.png
-    - assets/Comb_intro1.png
-    - assets/combo_self.png
+    - assets/json_images/

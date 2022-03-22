@@ -269,7 +269,7 @@ class _SituationPageState extends State<SituationPage> {
                               builder: (context) => GeneralInfo()),
                         );
                       },
-                      child: _buildImage('assets/click.json'),
+                      child: _buildImage('assets/json_images/click.json'),
                     ), // put the listbuilder here
                   ],
                 ),

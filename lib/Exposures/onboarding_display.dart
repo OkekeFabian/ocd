@@ -36,27 +36,27 @@ class OnboardingScreen1 extends StatelessWidget {
           title: "Know your OCD",
           body:
               "This section is to Fill in Situations that cause anxiety and answer questions relating to the exposed situations and it should be filled atleast the first time with a professional",
-          image: _buildImage('assets/therapy.json'),
+          image: _buildImage('assets/json_images/therapy.json'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Situation Steps",
           body:
               "Please Fill in the situation you want to answer the questions about and choose a suitable title to save it with. A total of 5 Situations is to be added to access the 'SELF-MONITORING' section",
-          image: _buildImage('assets/therapy.json'),
+          image: _buildImage('assets/json_images/therapy.json'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Question Area",
           body:
               'Click the button "Answer Questions" to fill in Details about your OCD regarding the situation filled',
-          image: _buildImage('assets/notes.json'),
+          image: _buildImage('assets/json_images/notes.json'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "General Information Area",
           body: 'Find out General Information about terms related to OCD',
-          image: _buildImage('assets/notes.json'),
+          image: _buildImage('assets/json_images/notes.json'),
           decoration: pageDecoration,
         ),
       ],

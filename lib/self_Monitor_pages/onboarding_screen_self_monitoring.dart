@@ -36,14 +36,14 @@ class OnboardingScreen extends StatelessWidget {
           title: "Self Monitoring",
           body:
               "It is recommended to go over this area with a Professional as it is very important for the treatment program that the Professional has an accurate picture of your obsessive thinking and compulsive behavior",
-          image: _buildImage('assets/therapy.json'),
+          image: _buildImage('assets/json_images/therapy.json'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "How to Use",
           body:
               "The Self Monitoring is to be filled after you experience your obsession by answering all questions after every obsession",
-          image: _buildImage('assets/notes.json'),
+          image: _buildImage('assets/json_images/notes.json'),
           decoration: pageDecoration,
         ),
       ],
