@@ -1,11 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../Exposures/situation_collector.dart';
+import '../const.dart';
+import '../custom_clipper.dart';
+import 'boxes.dart';
+import 'monitor_entry_dialog.dart';
 import 'situation_class.dart';
-import 'situation_entry_dialog.dart';
-import 'situation_list_item.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key, this.title}) : super(key: key);
@@ -16,7 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<WeightEntry> weightSaves = [];
+  //List<WeightEntry> weightSaves = [];
   final ScrollController _listViewScrollController = ScrollController();
   final double _itemExtent = 50.0;
   bool isSwitched = false;
@@ -36,130 +43,166 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
+  void dispose() {
+    Hive.close();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _openBox();
+  }
+
+  Future _openBox() async {
+    await Hive.openBox<WeightEntry>('situations');
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: Text('Self-Monitoring Form'),
+          centerTitle: true,
+        ),
+        body: ValueListenableBuilder<Box<WeightEntry>>(
+          valueListenable: Boxes.getSituations().listenable(),
+          builder: (context, box, _) {
+            final situations = box.values.toList().cast<WeightEntry>();
+
+            return buildContent(situations);
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () => showDialog(
+            context: context,
+            builder: (context) => WeightEntryDialog(
+              onClickedDone: addSituation,
+            ),
+          ),
+        ),
+      );
+
+  Widget buildContent(List<WeightEntry> transactions) => (transactions.isEmpty)
+      ? Center(
+          child: Text(
+            'No Situations yet!',
+            style: TextStyle(fontSize: 24),
+          ),
+        )
+      : Column(
+          children: [
+            SizedBox(height: 24),
+            Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.all(8),
+                itemCount: transactions.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final transaction = transactions[index];
+
+                  return buildTransaction(context, transaction);
+                },
+              ),
+            ),
+          ],
+        );
+
+  Widget buildTransaction(
+    BuildContext context,
+    WeightEntry transaction,
+  ) {
+    final date = DateFormat.yMMMd().format(transaction.dateTime);
+
+    return Card(
+      color: Colors.white,
+      child: ExpansionTile(
+        tilePadding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        title: Text(
+          transaction.rating.toString(),
+          maxLines: 2,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+        subtitle: Text(date),
+        trailing: Text(
+          transaction.experience,
+          style: const TextStyle(
+              color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16),
+        ),
         children: [
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const Text(
-                'Enable Automatic Handwashing Detection',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              _autoSwitch(),
-            ],
-          ),
-          (weightSaves.isEmpty)
-              ? const SizedBox(
-                  child: Text(
-                      'Please Press the + button to Enter a Monitored Situation'),
-                  height: 40.0,
-                )
-              : ListView.builder(
-                  shrinkWrap: true,
-                  reverse: true,
-                  controller: _listViewScrollController,
-                  itemCount: weightSaves.length,
-                  itemBuilder: (buildContext, index) {
-                    return InkWell(
-                        onTap: () => _editEntry(weightSaves[index]),
-                        child: WeightListItem(weightSaves[index], index + 1));
-                  },
-                ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Expanded(
-                child: Divider(
-                  indent: 20.0,
-                  endIndent: 10.0,
-                  thickness: 1,
-                ),
-              ),
-              Text(
-                "GO TO FIRST SECTION",
-                style: TextStyle(color: Colors.blueGrey),
-              ),
-              Expanded(
-                child: Divider(
-                  indent: 10.0,
-                  endIndent: 20.0,
-                  thickness: 1,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const SituationPage()),
-                );
-              },
-              child: const Text('Know your OCD section',
-                  style: TextStyle(color: Colors.white, fontSize: 15))),
+          buildButtons(context, transaction),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _openAddEntryDialog,
-        tooltip: 'Add new self Monitored Situation',
-        child: Icon(Icons.add),
       ),
     );
   }
 
-  void _addWeightSave(WeightEntry weightSave) {
-    setState(() {
-      weightSaves.add(weightSave);
-      _listViewScrollController.animateTo(
-        weightSaves.length * _itemExtent,
-        duration: const Duration(microseconds: 1),
-        curve: ElasticInCurve(0.01),
+  Widget buildButtons(BuildContext context, WeightEntry transaction) => Row(
+        children: [
+          Expanded(
+            child: TextButton.icon(
+              label: Text('Edit'),
+              icon: Icon(Icons.edit),
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => WeightEntryDialog(
+                    weightEntry: transaction,
+                    onClickedDone:
+                        (dateTime, rating, experience, response, result) =>
+                            editTransaction(transaction, dateTime, rating,
+                                experience, response, result),
+                  ),
+                  fullscreenDialog: true,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: TextButton.icon(
+              label: Text('Delete'),
+              icon: Icon(Icons.delete),
+              onPressed: () => deleteTransaction(transaction),
+            ),
+          )
+        ],
       );
-    });
+
+  Future addSituation(DateTime dateTime, int rating, String experience,
+      String response, String result) async {
+    final situation = WeightEntry()
+      ..dateTime = DateTime.now()
+      ..rating = rating
+      ..experience = experience
+      ..response = response
+      ..result = result;
+
+    final box = Boxes.getSituations();
+    box.add(situation);
+    //box.put('mykey', transaction);
+
+    // final mybox = Boxes.getTransactions();
+    // final myTransaction = mybox.get('key');
+    // mybox.values;
+    // mybox.keys;
   }
 
-  _editEntry(WeightEntry weightSave) {
-    Navigator.of(context)
-        .push(
-      MaterialPageRoute<WeightEntry>(
-        builder: (BuildContext context) {
-          return WeightEntryDialog.edit(weightSave);
-        },
-        fullscreenDialog: true,
-      ),
-    )
-        .then((newSave) {
-      if (newSave != null) {
-        setState(() => weightSaves[weightSaves.indexOf(weightSave)] = newSave);
-      }
-    });
+  void editTransaction(WeightEntry weightSave, DateTime dateTime, int rating,
+      String experience, String response, String result) {
+    weightSave.dateTime = dateTime;
+    weightSave.rating = rating;
+    weightSave.experience = experience;
+    weightSave.response = response;
+    weightSave.result = result;
+
+    // final box = Boxes.getTransactions();
+    // box.put(transaction.key, transaction);
+
+    weightSave.save();
   }
 
-  Future _openAddEntryDialog() async {
-    WeightEntry save =
-        await Navigator.of(context).push(MaterialPageRoute<WeightEntry>(
-            builder: (BuildContext context) {
-              return WeightEntryDialog.add(
-                  weightSaves.isNotEmpty ? weightSaves.last.weight : 0
+  void deleteTransaction(WeightEntry transaction) {
+    // final box = Boxes.getTransactions();
+    // box.delete(transaction.key);
 
-              );
-            },
-            fullscreenDialog: true));
-    if (save != null) {
-      _addWeightSave(save);
-    }
+    transaction.delete();
+    //setState(() => transactions.remove(transaction));
   }
 }
