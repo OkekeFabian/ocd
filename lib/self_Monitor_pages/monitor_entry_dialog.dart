@@ -3,10 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:lottie/lottie.dart';
-import 'package:meta/meta.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import 'situation_class.dart';
 
@@ -78,23 +74,26 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 8),
-              buildDate(),
-              const SizedBox(height: 8),
-              buildAnxiety(),
-              const SizedBox(height: 8),
-              buildExperienceField(),
-              buildExperience(),
-              const SizedBox(height: 8),
-              buildResponseField(),
-              buildResponse(),
-              const SizedBox(height: 8),
-              buildResultField(),
-              buildResult(),
-            ],
+          child: KeyboardDismisser(
+            gestures: const [GestureType.onTap],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 8),
+                buildDate(),
+                const SizedBox(height: 8),
+                buildAnxiety(),
+                const SizedBox(height: 8),
+                buildExperienceField(),
+                buildExperience(),
+                const SizedBox(height: 8),
+                buildResponseField(),
+                buildResponse(),
+                const SizedBox(height: 8),
+                buildResultField(),
+                buildResult(),
+              ],
+            ),
           ),
         ),
       ),
@@ -103,9 +102,9 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
 
   Widget _createAppBar(BuildContext context) {
     final isEditing = widget.weightEntry != null;
-    final title = isEditing ? 'Edit Transaction' : 'Add Transaction';
+    final title = isEditing ? 'Edit Situation' : 'Add Situation';
     return AppBar(
-      title: isEditing ? const Text("New entry") : const Text("Edit entry"),
+      title: Text(title),
       actions: [
         //buildCancelButton(context),
         buildAddButton(context, isEditing: isEditing),
@@ -169,12 +168,12 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
         leading: Icon(Icons.speaker_notes, color: Colors.grey[500]),
         title: TextFormField(
           minLines: 2,
-          maxLines: null,
+          maxLines: 6,
           controller: experienceController,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
             hintText:
-                "e.g Thoughts: That I am contaminated with \n the \n virus  \n Doubts: Did I wash my hands? \n Images: Of self or others lying in hospital on a \n ventilator",
+                "e.g Thoughts: I am contaminated with the virus.\nDoubts: Did I wash my hands?\nImages: I am or my friend is lying in a hospital on a ventilator.",
           ),
           validator: (experience) => experience != null && experience.isEmpty
               ? 'Please enter your experience'
@@ -201,11 +200,12 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
         leading: Icon(Icons.speaker_notes, color: Colors.grey[500]),
         title: TextFormField(
           keyboardType: TextInputType.multiline,
-          maxLines: null,
+          maxLines: 2,
           minLines: 2,
           decoration: const InputDecoration(
+            border: OutlineInputBorder(),
             hintText:
-                """ e.g I washed my hands for some minutes and \n repeated a prayer.""",
+                """ e.g I washed my hands for some minutes and repeated a prayer.""",
           ),
           validator: (experience) => experience != null && experience.isEmpty
               ? 'Please enter your response'
@@ -234,11 +234,11 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
         leading: Icon(Icons.speaker_notes, color: Colors.grey[500]),
         title: TextFormField(
           minLines: 2,
-          maxLines: null,
+          maxLines: 3,
           controller: resultController,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
-            hintText: "e.g I was unable to shake my sibling",
+            hintText: "e.g I was unable to shake my sibling.",
           ),
           validator: (experience) => experience != null && experience.isEmpty
               ? 'Please enter the result'

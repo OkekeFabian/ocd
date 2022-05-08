@@ -4,7 +4,7 @@ import 'package:ocd/Exposures/exposure_data.dart';
 import 'package:ocd/General Information/constants.dart';
 
 class SituationDetailPage extends StatelessWidget {
-  SituationDetailPage({Key key, this.exposureEntry, this.index})
+  const SituationDetailPage({Key key, @required this.exposureEntry, this.index})
       : super(key: key);
 
   final ExposureEntry exposureEntry;
@@ -26,7 +26,7 @@ class SituationDetailPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 300),
+                        const SizedBox(height: 300),
                         Text(
                           exposureEntry.title.toString(),
                           style: TextStyle(
@@ -47,8 +47,8 @@ class SituationDetailPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.left,
                         ),
-                        Divider(color: Colors.black38),
-                        SizedBox(height: 20),
+                        const Divider(color: Colors.black38),
+                        const SizedBox(height: 20),
                         Text(
                           'Obsession',
                           style: TextStyle(
@@ -59,8 +59,8 @@ class SituationDetailPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.left,
                         ),
-                        Divider(color: Colors.black38),
-                        SizedBox(height: 12),
+                        const Divider(color: Colors.black38),
+                        const SizedBox(height: 12),
                         Text(
                           exposureEntry.obsession ?? '',
                           maxLines: 25,
@@ -85,8 +85,8 @@ class SituationDetailPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.left,
                         ),
-                        SizedBox(height: 4),
-                        Divider(color: Colors.black),
+                        const SizedBox(height: 4),
+                        const Divider(color: Colors.black),
                         Text(
                           exposureEntry.thought.toString() ?? '',
                           maxLines: 25,
@@ -98,9 +98,9 @@ class SituationDetailPage extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 20),
-                        Divider(color: Colors.blue),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 20),
+                        const Divider(color: Colors.blue),
+                        const SizedBox(height: 10),
                         Text(
                           'Disgust',
                           style: TextStyle(
@@ -111,8 +111,8 @@ class SituationDetailPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.left,
                         ),
-                        SizedBox(height: 4),
-                        Divider(color: Colors.black),
+                        const SizedBox(height: 4),
+                        const Divider(color: Colors.black),
                         Text(
                           exposureEntry.disgust.toString() ?? '',
                           maxLines: 25,
@@ -124,9 +124,9 @@ class SituationDetailPage extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 20),
-                        Divider(color: Colors.blue),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 20),
+                        const Divider(color: Colors.blue),
+                        const SizedBox(height: 10),
                         Text(
                           'Avoidance',
                           style: TextStyle(
@@ -137,8 +137,8 @@ class SituationDetailPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.left,
                         ),
-                        SizedBox(height: 4),
-                        Divider(color: Colors.black),
+                        const SizedBox(height: 4),
+                        const Divider(color: Colors.black),
                         Text(
                           exposureEntry.avoidance.toString() ?? '',
                           maxLines: 25,
@@ -150,9 +150,9 @@ class SituationDetailPage extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 20),
-                        Divider(color: Colors.blue),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 20),
+                        const Divider(color: Colors.blue),
+                        const SizedBox(height: 10),
                         Text(
                           'Ritual',
                           style: TextStyle(
@@ -163,8 +163,8 @@ class SituationDetailPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.left,
                         ),
-                        SizedBox(height: 4),
-                        Divider(color: Colors.black),
+                        const SizedBox(height: 4),
+                        const Divider(color: Colors.black),
                         Text(
                           exposureEntry.ritual.toString() ?? '',
                           maxLines: 25,
@@ -176,9 +176,9 @@ class SituationDetailPage extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 20),
-                        Divider(color: Colors.blue),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 20),
+                        const Divider(color: Colors.blue),
+                        const SizedBox(height: 10),
                         Text(
                           'Mental Rituals',
                           style: TextStyle(
@@ -189,8 +189,8 @@ class SituationDetailPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.left,
                         ),
-                        SizedBox(height: 4),
-                        Divider(color: Colors.black),
+                        const SizedBox(height: 4),
+                        const Divider(color: Colors.black),
                         Text(
                           exposureEntry.mental.toString() ?? '',
                           maxLines: 25,
@@ -229,7 +229,7 @@ class SituationDetailPage extends StatelessWidget {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
                 Navigator.pop(context);
               },

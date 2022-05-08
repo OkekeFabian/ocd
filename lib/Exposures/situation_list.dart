@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import 'exposure_data.dart';
-//import 'package:weight_tracker/model/weight_entry.dart';
 
 class SituationListItem extends StatelessWidget {
   final ExposureEntry exposureEntry;

@@ -3,21 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class AsserPlayerWidget extends StatefulWidget {
-
-
   @override
   _AssetPlayerWidgetState createState() => _AssetPlayerWidgetState();
-  
 }
 
 class _AssetPlayerWidgetState extends State<AsserPlayerWidget> {
-
   final asset = 'assets/Tug_of_war_with_a_Monster.mp4';
 
   VideoPlayerController _controller;
 
-
-  
   @override
   void initState() {
     super.initState();
@@ -28,33 +22,28 @@ class _AssetPlayerWidgetState extends State<AsserPlayerWidget> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     _controller.dispose();
     super.dispose();
-
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return _controller != null && _controller.value.isInitialized
-              ? Container(alignment: Alignment.topCenter, child: buildVideo(),)
-              : Container(
-                  height: 250,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-
-                ),
-    );
+        ? Container(
+            alignment: Alignment.topCenter,
+            child: buildVideo(),
+          )
+        : const SizedBox(
+            height: 250,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
   }
-
 
   Widget buildVideo() => buildVideoPlayer();
 
   Widget buildVideoPlayer() => VideoPlayer(_controller);
-
-
-  
-
 }
-

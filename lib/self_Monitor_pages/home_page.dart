@@ -3,15 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../Exposures/situation_collector.dart';
-import '../const.dart';
-import '../custom_clipper.dart';
 import 'boxes.dart';
 import 'monitor_entry_dialog.dart';
 import 'situation_class.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,7 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //List<WeightEntry> weightSaves = [];
-  final ScrollController _listViewScrollController = ScrollController();
   final double _itemExtent = 50.0;
   bool isSwitched = false;
 
@@ -34,7 +27,6 @@ class _HomePageState extends State<HomePage> {
       onChanged: (value) {
         setState(() {
           isSwitched = value;
-          print(isSwitched);
         });
       },
       activeTrackColor: Colors.lightGreenAccent,
@@ -61,7 +53,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('Self-Monitoring Form'),
+          title: const Text('Self-Monitoring Form'),
           centerTitle: true,
         ),
         body: ValueListenableBuilder<Box<WeightEntry>>(
@@ -73,7 +65,7 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () => showDialog(
             context: context,
             builder: (context) => WeightEntryDialog(
@@ -84,7 +76,7 @@ class _HomePageState extends State<HomePage> {
       );
 
   Widget buildContent(List<WeightEntry> transactions) => (transactions.isEmpty)
-      ? Center(
+      ? const Center(
           child: Text(
             'No Situations yet!',
             style: TextStyle(fontSize: 24),
@@ -92,10 +84,10 @@ class _HomePageState extends State<HomePage> {
         )
       : Column(
           children: [
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Expanded(
               child: ListView.builder(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 itemCount: transactions.length,
                 itemBuilder: (BuildContext context, int index) {
                   final transaction = transactions[index];
@@ -116,11 +108,11 @@ class _HomePageState extends State<HomePage> {
     return Card(
       color: Colors.white,
       child: ExpansionTile(
-        tilePadding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        tilePadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
         title: Text(
           transaction.rating.toString(),
           maxLines: 2,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         subtitle: Text(date),
         trailing: Text(
@@ -139,8 +131,8 @@ class _HomePageState extends State<HomePage> {
         children: [
           Expanded(
             child: TextButton.icon(
-              label: Text('Edit'),
-              icon: Icon(Icons.edit),
+              label: const Text('Edit'),
+              icon: const Icon(Icons.edit),
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => WeightEntryDialog(
@@ -157,10 +149,13 @@ class _HomePageState extends State<HomePage> {
           ),
           Expanded(
             child: TextButton.icon(
-              label: Text('Delete'),
-              icon: Icon(Icons.delete),
-              onPressed: () => deleteTransaction(transaction),
-            ),
+                label: const Text('Delete'),
+                icon: const Icon(Icons.delete),
+                onPressed: () {
+                  deleteTransaction(transaction);
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('A monitored situation has been deleted')));
+                }),
           )
         ],
       );

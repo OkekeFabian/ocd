@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:ocd/General%20Information/general_data.dart';
 
 import 'constants.dart';
-class DetailPage extends StatelessWidget {
 
+class DetailPage extends StatelessWidget {
   const DetailPage({Key key, this.dataInfo}) : super(key: key);
 
   final DataInfo dataInfo;
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-
         bottom: false,
         child: Stack(
           children: <Widget>[
@@ -22,13 +19,12 @@ class DetailPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-
                   Padding(
                     padding: const EdgeInsets.all(32.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(height: 300),
+                        const SizedBox(height: 300),
                         Text(
                           dataInfo.name,
                           style: TextStyle(
@@ -49,8 +45,8 @@ class DetailPage extends StatelessWidget {
                           ),
                           textAlign: TextAlign.left,
                         ),
-                        Divider(color: Colors.black38),
-                        SizedBox(height: 32),
+                        const Divider(color: Colors.black38),
+                        const SizedBox(height: 32),
                         Text(
                           dataInfo.description ?? '',
                           maxLines: 25,
@@ -62,8 +58,8 @@ class DetailPage extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 32),
-                        Divider(color: Colors.black38),
+                        const SizedBox(height: 32),
+                        const Divider(color: Colors.black38),
                       ],
                     ),
                   ),
@@ -71,10 +67,10 @@ class DetailPage extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 32.0),
                     child: Text(
                       'Gallery',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Avenir',
                         fontSize: 25,
-                        color: const Color(0xff47455f),
+                        color: Color(0xff47455f),
                         fontWeight: FontWeight.w300,
                       ),
                       textAlign: TextAlign.left,
@@ -125,7 +121,7 @@ class DetailPage extends StatelessWidget {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
                 Navigator.pop(context);
               },

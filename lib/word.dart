@@ -5,13 +5,9 @@ class Word extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     // Use Align if have only one child, if have multiple:
-    return Container(
-        child: const Text(
-          'Word of the day',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0),
-          ),
-        );
+    return const Text(
+      'Word of the day',
+      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+    );
   }
 }

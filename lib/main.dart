@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ocd/About/about_main.dart';
 import 'package:ocd/self_Monitor_pages/situation_class.dart';
 
-import 'package:ocd/word.dart';
-
 import 'About/detail_page.dart';
+import 'Exposures/exposure_data.dart';
 import 'const.dart';
 import 'custom_clipper.dart';
 import 'first_slider.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +15,10 @@ Future main() async {
   await Hive.initFlutter();
 
   Hive.registerAdapter(WeightEntryAdapter());
+  Hive.registerAdapter(ExposureEntryAdapter());
 
   await Hive.openBox<WeightEntry>('situations');
+  await Hive.openBox<ExposureEntry>('exposures');
 
   runApp(const MyApp());
 }
@@ -113,7 +112,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => DetailPage()),
+            MaterialPageRoute(builder: (context) => const DetailPage()),
           );
         },
       ),

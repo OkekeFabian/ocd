@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:lottie/lottie.dart';
-import 'package:ocd/Exposures/situation_collector.dart';
 import 'package:ocd/General%20Information/main_page.dart';
 
 import 'exposure_data.dart';
@@ -70,7 +68,7 @@ class _QuestionPageState extends State<QuestionPage> {
               gestures: const [GestureType.onTap],
               child: Stepper(
                 type: stepperType,
-                physics: ScrollPhysics(),
+                physics: const ScrollPhysics(),
                 currentStep: _currentStep,
                 onStepTapped: (step) => tapped(step),
                 onStepContinue: continued,
@@ -79,7 +77,7 @@ class _QuestionPageState extends State<QuestionPage> {
                     (BuildContext context, ControlsDetails controls) {
                   final isLastStep = _currentStep == 6;
                   return Container(
-                    margin: EdgeInsets.only(top: 50),
+                    margin: const EdgeInsets.only(top: 50),
                     child: Row(
                       children: [
                         Expanded(
@@ -93,7 +91,7 @@ class _QuestionPageState extends State<QuestionPage> {
                         if (_currentStep != 0)
                           Expanded(
                               child: ElevatedButton(
-                            child: Text('Back'),
+                            child: const Text('Back'),
                             onPressed: controls.onStepCancel,
                           )),
                       ],
@@ -206,7 +204,8 @@ class _QuestionPageState extends State<QuestionPage> {
                   ),
                   Step(
                     title: const Text('Completed'),
-                    content: Text('Thank you! Click Submit to view your List'),
+                    content:
+                        const Text('Thank you! Click Submit to view your List'),
                     isActive: _currentStep >= 0,
                     state: _currentStep >= 6
                         ? StepState.complete
@@ -225,7 +224,7 @@ class _QuestionPageState extends State<QuestionPage> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => GeneralInfo()),
+              MaterialPageRoute(builder: (context) => const GeneralInfo()),
             );
           },
           child: const FloatingActionButton(

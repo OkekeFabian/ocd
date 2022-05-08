@@ -12,7 +12,7 @@ class MyCustomClipper extends CustomClipper<Path> {
 
   @override
   getClip(Size size) {
-    var path = new Path();
+    var path = Path();
     if (clipType == ClipType.bottom) {
       createBottom(size, path);
     } else if (clipType == ClipType.semiCircle) {
@@ -29,11 +29,11 @@ class MyCustomClipper extends CustomClipper<Path> {
   createSemiCirle(Size size, Path path) {
     path.lineTo(size.width / 1.40, 0);
 
-    var firstControlPoint = new Offset(size.width / 1.30, size.height / 2.5);
-    var firstEndPoint = new Offset(size.width / 1.85, size.height / 1.85);
+    var firstControlPoint = Offset(size.width / 1.30, size.height / 2.5);
+    var firstEndPoint = Offset(size.width / 1.85, size.height / 1.85);
 
-    var secondControlPoint = new Offset(size.width / 4, size.height / 1.45);
-    var secondEndPoint = new Offset(0, size.height / 1.75);
+    var secondControlPoint = Offset(size.width / 4, size.height / 1.45);
+    var secondEndPoint = Offset(0, size.height / 1.75);
 
     path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
         firstEndPoint.dx, firstEndPoint.dy);
@@ -46,8 +46,8 @@ class MyCustomClipper extends CustomClipper<Path> {
 
   createBottom(Size size, Path path) {
     path.lineTo(0, size.height / 1.19);
-    var secondControlPoint = new Offset((size.width / 2), size.height);
-    var secondEndPoint = new Offset(size.width, size.height / 1.19);
+    var secondControlPoint = Offset((size.width / 2), size.height);
+    var secondEndPoint = Offset(size.width, size.height / 1.19);
 
     path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
         secondEndPoint.dx, secondEndPoint.dy);
@@ -56,8 +56,8 @@ class MyCustomClipper extends CustomClipper<Path> {
 
   createHalfCircle(Size size, Path path) {
     path.lineTo(size.width / 2, 0);
-    var firstControlPoint = new Offset(size.width / 1.10, size.height / 2);
-    var firstEndPoint = new Offset(size.width / 2, size.height);
+    var firstControlPoint = Offset(size.width / 1.10, size.height / 2);
+    var firstEndPoint = Offset(size.width / 2, size.height);
     path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
         firstEndPoint.dx, firstEndPoint.dy);
     path.lineTo(0, size.height);
@@ -68,7 +68,7 @@ class MyCustomClipper extends CustomClipper<Path> {
 
     var curXPos = 0.0;
     var curYPos = size.height;
-    Random rnd = new Random();
+    Random rnd = Random();
 
     var increment = size.width / 40;
     while (curXPos < size.width) {
