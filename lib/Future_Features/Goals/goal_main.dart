@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ocd/Goals/long_term.dart';
-import 'package:ocd/Goals/mid_term.dart';
-import 'package:ocd/Goals/short_term.dart';
+
+import 'long_term.dart';
+import 'mid_term.dart';
+import 'short_term.dart';
 
 class GoalsBar extends StatelessWidget {
   const GoalsBar({Key key}) : super(key: key);
@@ -23,11 +24,7 @@ class GoalsBar extends StatelessWidget {
             title: const Text('Goals'),
           ),
           body: TabBarView(
-            children: [
-              ShortTermList(),
-              MidTermList(),
-              LongTermList()
-            ],
+            children: [ShortTermList(), MidTermList(), LongTermList()],
           ),
         ),
       ),

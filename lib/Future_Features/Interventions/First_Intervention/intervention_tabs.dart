@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ocd/Interventions/First_Intervention/first_intervention_act.dart';
-import 'package:ocd/Interventions/First_Intervention/first_intervention_erp.dart';
+
+import 'first_intervention_act.dart';
+import 'first_intervention_erp.dart';
 
 class TabBarDemo extends StatelessWidget {
   const TabBarDemo({Key key}) : super(key: key);

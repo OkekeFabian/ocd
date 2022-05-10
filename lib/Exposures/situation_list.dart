@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'exposure_data.dart';
 
 class SituationListItem extends StatelessWidget {
   final ExposureEntry exposureEntry;
   final int index;
 
-  SituationListItem(this.exposureEntry, this.index);
+  const SituationListItem(
+    Key key,
+    this.exposureEntry,
+    this.index,
+  ) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

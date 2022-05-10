@@ -36,18 +36,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    Hive.close();
+    Hive.box('situations').close();
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _openBox();
-  }
-
-  Future _openBox() async {
-    await Hive.openBox<WeightEntry>('situations');
   }
 
   @override
@@ -77,9 +67,12 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildContent(List<WeightEntry> transactions) => (transactions.isEmpty)
       ? const Center(
-          child: Text(
-            'No Situations yet!',
-            style: TextStyle(fontSize: 24),
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'No Situations yet! Click the button to add a monitored Situation.',
+              style: TextStyle(fontSize: 20),
+            ),
           ),
         )
       : Column(
@@ -110,13 +103,13 @@ class _HomePageState extends State<HomePage> {
       child: ExpansionTile(
         tilePadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
         title: Text(
-          transaction.rating.toString(),
+          transaction.experience,
           maxLines: 2,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         subtitle: Text(date),
         trailing: Text(
-          transaction.experience,
+          transaction.rating.toString(),
           style: const TextStyle(
               color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16),
         ),
@@ -171,12 +164,6 @@ class _HomePageState extends State<HomePage> {
 
     final box = Boxes.getSituations();
     box.add(situation);
-    //box.put('mykey', transaction);
-
-    // final mybox = Boxes.getTransactions();
-    // final myTransaction = mybox.get('key');
-    // mybox.values;
-    // mybox.keys;
   }
 
   void editTransaction(WeightEntry weightSave, DateTime dateTime, int rating,
@@ -194,9 +181,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void deleteTransaction(WeightEntry transaction) {
-    // final box = Boxes.getTransactions();
-    // box.delete(transaction.key);
-
     transaction.delete();
     //setState(() => transactions.remove(transaction));
   }

@@ -53,6 +53,7 @@ dependencies:
   path_provider:
   analyzer:
   archive:
+  shared_preferences:
 
 dev_dependencies:
   flutter_swiper:

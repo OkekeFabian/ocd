@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ocd/Exposures/exposure_data.dart';
 import 'package:ocd/General%20Information/main_page.dart';
 import 'package:ocd/Exposures/question_stepper.dart';
 import 'package:ocd/Exposures/boxes.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'dialog_display.dart';
-import 'situation_list.dart';
 
 class SituationPage extends StatefulWidget {
   const SituationPage({
@@ -22,22 +19,11 @@ class SituationPage extends StatefulWidget {
 class _SituationPageState extends State<SituationPage> {
   @override
   void dispose() {
-    Hive.close();
+    Hive.box('exposures').close();
     super.dispose();
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _openBox();
-  }
-
-  Future _openBox() async {
-    await Hive.openBox<ExposureEntry>('exposures');
-  }
-
   //List<ExposureEntry> exposureSaves = [];
-  final ScrollController _listViewScrollController = ScrollController();
   List<String> topicOptions = [];
   final situationController = TextEditingController();
   final topicController = TextEditingController();
@@ -62,175 +48,170 @@ class _SituationPageState extends State<SituationPage> {
   var cardTextStyle = const TextStyle(
       fontFamily: "Montserrat Regular", fontSize: 14, color: Colors.white);
 
-  addList() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) =>
-              QuestionPage(situationController.text, topicController.text)),
-    );
-
-    topicOptions.add(topicController.text);
-    topicController.clear();
-    situationController.clear();
-  }
-
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: const Text(
-            "Situation Area",
-            style: TextStyle(color: Colors.white),
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            title: const Text(
+              "Situation Area",
+              style: TextStyle(color: Colors.white),
+            ),
+            centerTitle: true,
           ),
-          centerTitle: true,
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                ValueListenableBuilder<Box<ExposureEntry>>(
-                  valueListenable: Boxes.getExposures().listenable(),
-                  builder: (context, box, _) {
-                    final situations =
-                        box.values.toList().cast<ExposureEntry>();
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  ValueListenableBuilder<Box<ExposureEntry>>(
+                    valueListenable: Boxes.getExposures().listenable(),
+                    builder: (context, box, _) {
+                      final situations =
+                          box.values.toList().cast<ExposureEntry>();
 
-                    return buildContent(situations);
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Expanded(
-                      child: Divider(
-                        indent: 20.0,
-                        endIndent: 10.0,
-                        thickness: 1,
-                      ),
-                    ),
-                    Text(
-                      "Situation Steps",
-                      style: TextStyle(color: Colors.blueGrey),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        indent: 10.0,
-                        endIndent: 20.0,
-                        thickness: 1,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                        child: TextField(
-                      controller: topicController,
-                      decoration: InputDecoration(
-                        hintText: 'e.g ',
-                        labelText: 'Title',
-                        suffixIcon: topicController.text.isEmpty
-                            ? Container(
-                                width: 2,
-                              )
-                            : IconButton(
-                                onPressed: () => topicController.clear(),
-                                icon: const Icon(Icons.close)),
-                        border: const OutlineInputBorder(),
-                      ),
-                      textInputAction: TextInputAction.done,
-                    )),
-                    PopupMenuButton<String>(
-                      icon: const Icon(Icons.arrow_drop_down),
-                      onSelected: (String value) {
-                        topicController.text = value;
-                      },
-                      itemBuilder: (BuildContext context) {
-                        return topicOptions
-                            .map<PopupMenuItem<String>>((String value) {
-                          return PopupMenuItem(
-                              child: Text(value), value: value);
-                        }).toList();
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  controller: situationController,
-                  decoration: InputDecoration(
-                    hintText: 'e.g Dirt on shoes',
-                    labelText: 'Situation',
-                    suffixIcon: situationController.text.isEmpty
-                        ? Container(
-                            width: 2,
-                          )
-                        : IconButton(
-                            onPressed: () => situationController.clear(),
-                            icon: const Icon(Icons.close)),
-                    border: const OutlineInputBorder(),
+                      return buildContent(situations);
+                    },
                   ),
-                  textInputAction: TextInputAction.done,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: raisedButtonStyle,
-                  onPressed: () {
-                    //connectTo();
-                    topicOptions.add(topicController.text);
-                    moveToQuestionStopper();
-                  },
-                  child: const Text('Answer Questions'),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Expanded(
-                      child: Divider(
-                        indent: 20.0,
-                        endIndent: 10.0,
-                        thickness: 1,
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Expanded(
+                        child: Divider(
+                          indent: 20.0,
+                          endIndent: 10.0,
+                          thickness: 1,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "For General Information about Terms",
-                      style: TextStyle(color: Colors.blueGrey),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        indent: 10.0,
-                        endIndent: 20.0,
-                        thickness: 1,
+                      Text(
+                        "Situation Steps",
+                        style: TextStyle(color: Colors.blueGrey),
                       ),
+                      Expanded(
+                        child: Divider(
+                          indent: 10.0,
+                          endIndent: 20.0,
+                          thickness: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: TextField(
+                        controller: topicController,
+                        decoration: InputDecoration(
+                          hintText: 'e.g Dirt',
+                          labelText: 'Title',
+                          suffixIcon: topicController.text.isEmpty
+                              ? Container(
+                                  width: 2,
+                                )
+                              : IconButton(
+                                  onPressed: () => topicController.clear(),
+                                  icon: const Icon(Icons.clear)),
+                          border: const OutlineInputBorder(),
+                        ),
+                        textInputAction: TextInputAction.done,
+                      )),
+                      PopupMenuButton<String>(
+                        icon: const Icon(Icons.arrow_drop_down),
+                        onSelected: (String value) {
+                          topicController.text = value;
+                        },
+                        itemBuilder: (BuildContext context) {
+                          return topicOptions
+                              .map<PopupMenuItem<String>>((String value) {
+                            return PopupMenuItem(
+                                child: Text(value), value: value);
+                          }).toList();
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    controller: situationController,
+                    decoration: InputDecoration(
+                      hintText: 'e.g Dirt on shoes',
+                      labelText: 'Situation',
+                      suffixIcon: situationController.text.isEmpty
+                          ? Container(
+                              width: 2,
+                            )
+                          : IconButton(
+                              onPressed: () => situationController.clear(),
+                              icon: const Icon(Icons.clear)),
+                      border: const OutlineInputBorder(),
                     ),
-                  ],
-                ),
-                InkWell(
-                  splashColor: Colors.blue.withAlpha(30),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const GeneralInfo()),
-                    );
-                  },
-                  child: _buildImage('assets/json_images/click.json'),
-                ),
-              ],
+                    textInputAction: TextInputAction.done,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    style: raisedButtonStyle,
+                    onPressed: () {
+                      //connectTo();
+                      (topicController.text != '' &&
+                              situationController.text != '')
+                          ? moveToQuestionStopper()
+                          : ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      'Please fill in both a Title and Situation')));
+                    },
+                    child: const Text('Answer Questions'),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Expanded(
+                        child: Divider(
+                          indent: 20.0,
+                          endIndent: 10.0,
+                          thickness: 1,
+                        ),
+                      ),
+                      Text(
+                        "For General Information about Terms",
+                        style: TextStyle(color: Colors.blueGrey),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          indent: 10.0,
+                          endIndent: 20.0,
+                          thickness: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                  InkWell(
+                    splashColor: Colors.blue.withAlpha(30),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const GeneralInfo()),
+                      );
+                    },
+                    child: _buildImage('assets/json_images/click.json'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -301,25 +282,27 @@ class _SituationPageState extends State<SituationPage> {
           maxLines: 2,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
-        subtitle: Text(transaction.obsession),
+        subtitle: Text(transaction.situation),
         trailing: Text(
-          transaction.situation,
+          index.toString(),
           style: const TextStyle(
-              color: Colors.green, fontWeight: FontWeight.bold, fontSize: 16),
+              color: Colors.green, fontWeight: FontWeight.bold, fontSize: 20),
         ),
         children: [
-          buildButtons(context, transaction,index),
+          buildButtons(context, transaction, index),
         ],
       ),
     );
   }
 
-  Widget buildButtons(BuildContext context, ExposureEntry transaction, int index) => Row(
+  Widget buildButtons(
+          BuildContext context, ExposureEntry transaction, int index) =>
+      Row(
         children: [
           Expanded(
             child: TextButton.icon(
               label: const Text('View'),
-              icon: const Icon(Icons.edit),
+              icon: const Icon(Icons.remove_red_eye_rounded),
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => SituationDetailPage(
@@ -358,12 +341,14 @@ class _SituationPageState extends State<SituationPage> {
   }
 
   void moveToQuestionStopper() async {
+    topicOptions.add(topicController.text);
     final information = await Navigator.push(
       context,
       MaterialPageRoute(
           fullscreenDialog: true,
-          builder: (context) =>
-              QuestionPage(situationController.text, topicController.text)),
+          builder: (context) => QuestionPage(
+              situation: situationController.text,
+              title: topicController.text)),
     );
 
     topicController.clear();

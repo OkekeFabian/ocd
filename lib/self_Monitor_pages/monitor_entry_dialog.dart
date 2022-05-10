@@ -1,9 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-
 import 'situation_class.dart';
 
 class WeightEntryDialog extends StatefulWidget {
@@ -16,7 +13,9 @@ class WeightEntryDialog extends StatefulWidget {
     String result,
   ) onClickedDone;
 
-  WeightEntryDialog({this.weightEntry, @required this.onClickedDone});
+  const WeightEntryDialog(
+      {Key key, this.weightEntry, @required this.onClickedDone})
+      : super(key: key);
 
   @override
   _WeightEntryDialogState createState() => _WeightEntryDialogState();
@@ -56,6 +55,8 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
       resultController.text = situation.result;
       _dateTime = situation.dateTime;
       _rating = situation.rating;
+    } else {
+      _rating = 0;
     }
   }
 
@@ -69,13 +70,13 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _createAppBar(context),
-      body: Form(
-        key: formKey,
-        child: SingleChildScrollView(
-          child: KeyboardDismisser(
-            gestures: const [GestureType.onTap],
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: _createAppBar(context),
+        body: Form(
+          key: formKey,
+          child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -85,12 +86,15 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
                 buildAnxiety(),
                 const SizedBox(height: 8),
                 buildExperienceField(),
+                const SizedBox(height: 10),
                 buildExperience(),
                 const SizedBox(height: 8),
                 buildResponseField(),
+                const SizedBox(height: 10),
                 buildResponse(),
                 const SizedBox(height: 8),
                 buildResultField(),
+                const SizedBox(height: 10),
                 buildResult(),
               ],
             ),
@@ -167,14 +171,23 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
   Widget buildExperience() => ListTile(
         leading: Icon(Icons.speaker_notes, color: Colors.grey[500]),
         title: TextFormField(
-          minLines: 2,
+          minLines: 3,
           maxLines: 6,
           controller: experienceController,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            hintText:
-                "e.g Thoughts: I am contaminated with the virus.\nDoubts: Did I wash my hands?\nImages: I am or my friend is lying in a hospital on a ventilator.",
-          ),
+          decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText:
+                  "e.g Thoughts: I am contaminated with the virus.\nDoubts: Did I wash my hands?\nImages: My friend is lying in a hospital on a ventilator.",
+              labelStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontStyle: FontStyle.italic,
+              ),
+              suffixIcon: experienceController.text.isNotEmpty
+                  ? IconButton(
+                      onPressed: () => experienceController.clear(),
+                      icon: const Icon(Icons.clear))
+                  : null),
           validator: (experience) => experience != null && experience.isEmpty
               ? 'Please enter your experience'
               : null,
@@ -200,13 +213,22 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
         leading: Icon(Icons.speaker_notes, color: Colors.grey[500]),
         title: TextFormField(
           keyboardType: TextInputType.multiline,
-          maxLines: 2,
+          maxLines: 3,
           minLines: 2,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            hintText:
-                """ e.g I washed my hands for some minutes and repeated a prayer.""",
-          ),
+          decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              suffixIcon: responseController.text.isNotEmpty
+                  ? IconButton(
+                      onPressed: () => responseController.clear(),
+                      icon: const Icon(Icons.clear))
+                  : null,
+              labelText:
+                  """ e.g I washed my hands for some minutes and repeated a prayer.""",
+              labelStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontStyle: FontStyle.italic,
+              )),
           validator: (experience) => experience != null && experience.isEmpty
               ? 'Please enter your response'
               : null,
@@ -236,10 +258,19 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
           minLines: 2,
           maxLines: 3,
           controller: resultController,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: "e.g I was unable to shake my sibling.",
-          ),
+          decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              suffixIcon: resultController.text.isNotEmpty
+                  ? IconButton(
+                      onPressed: () => experienceController.clear(),
+                      icon: const Icon(Icons.clear))
+                  : null,
+              labelText: "e.g I was unable to shake my sibling.",
+              labelStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 14,
+                fontStyle: FontStyle.italic,
+              )),
           validator: (experience) => experience != null && experience.isEmpty
               ? 'Please enter the result'
               : null,

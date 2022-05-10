@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ocd/Interventions/First_Intervention/intervention_tabs.dart';
+
+import 'intervention_tabs.dart';
+
 
 class FirstInterventionPage extends StatefulWidget {
 

@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+
 import 'package:ocd/General%20Information/main_page.dart';
 
 import 'exposure_data.dart';
 
 class QuestionPage extends StatefulWidget {
-  String situation;
-  String title;
+  final String situation;
+  final String title;
 
-  QuestionPage(this.situation, this.title);
+  const QuestionPage({
+    Key key,
+    @required this.situation,
+    @required this.title,
+  }) : super(key: key);
 
   @override
   _QuestionPageState createState() => _QuestionPageState();
@@ -104,9 +109,13 @@ class _QuestionPageState extends State<QuestionPage> {
                         'Obsession trigger - Objects/situations which are sources of high anxiety/discomfort'),
                     content: Column(
                       children: <Widget>[
+                        const SizedBox(
+                          height: 4,
+                        ),
                         TextFormField(
                           controller: externalController,
                           decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: 'e.g Touching a door handle'),
                         ),
                       ],
@@ -121,9 +130,13 @@ class _QuestionPageState extends State<QuestionPage> {
                         'Thoughts - What thoughts are evoked by this trigger'),
                     content: Column(
                       children: <Widget>[
+                        const SizedBox(
+                          height: 4,
+                        ),
                         TextFormField(
                           controller: thoughtController,
                           decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText:
                                   'e.g I could inadvertently spread some horrible disease'),
                         ),
@@ -139,9 +152,13 @@ class _QuestionPageState extends State<QuestionPage> {
                         'Disgust - Write out situations that cause disgust '),
                     content: Column(
                       children: <Widget>[
+                        const SizedBox(
+                          height: 4,
+                        ),
                         TextFormField(
                           controller: disgustController,
                           decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: 'e.g Seeing an oil stain'),
                         ),
                       ],
@@ -156,9 +173,13 @@ class _QuestionPageState extends State<QuestionPage> {
                         'Avoidance Behavior - Specify situations that you avoid to cope with your anxiety'),
                     content: Column(
                       children: <Widget>[
+                        const SizedBox(
+                          height: 4,
+                        ),
                         TextFormField(
                           controller: avoidanceController,
                           decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: 'e.g I do not use public toilet'),
                         ),
                       ],
@@ -173,9 +194,13 @@ class _QuestionPageState extends State<QuestionPage> {
                         'Rituals - Specify rituals you usually perform'),
                     content: Column(
                       children: <Widget>[
+                        const SizedBox(
+                          height: 4,
+                        ),
                         TextFormField(
                           controller: ritualController,
                           decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: 'e.g Washing your hands'),
                         ),
                       ],
@@ -190,9 +215,13 @@ class _QuestionPageState extends State<QuestionPage> {
                         'Mental Rituals - Specify Mental rituals you usually perform'),
                     content: Column(
                       children: <Widget>[
+                        const SizedBox(
+                          height: 4,
+                        ),
                         TextFormField(
                           controller: mentalRitualController,
                           decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: 'e.g Special prayers'),
                         ),
                       ],
