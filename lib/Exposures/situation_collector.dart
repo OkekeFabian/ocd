@@ -62,7 +62,7 @@ class _SituationPageState extends State<SituationPage> {
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
                   ValueListenableBuilder<Box<ExposureEntry>>(
@@ -70,7 +70,6 @@ class _SituationPageState extends State<SituationPage> {
                     builder: (context, box, _) {
                       final situations =
                           box.values.toList().cast<ExposureEntry>();
-
                       return buildContent(situations);
                     },
                   ),
@@ -219,7 +218,9 @@ class _SituationPageState extends State<SituationPage> {
 
   Widget buildContent(List<ExposureEntry> transactions) => Column(
         children: [
-          const SizedBox(height: 10),
+          const SizedBox(
+            height: 5,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
@@ -243,14 +244,18 @@ class _SituationPageState extends State<SituationPage> {
               ),
             ],
           ),
-          const SizedBox(
-            height: 20,
-          ),
           (transactions.isEmpty)
-              ? const Center(
-                  child: Text(
-                    'List of Situations will appear here',
-                    style: TextStyle(fontSize: 24),
+              ? Center(
+                  child: Column(
+                    children: const [
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'List of Situations will appear here',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ],
                   ),
                 )
               : Column(
@@ -276,7 +281,7 @@ class _SituationPageState extends State<SituationPage> {
     return Card(
       color: Colors.white,
       child: ExpansionTile(
-        tilePadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        tilePadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
         title: Text(
           transaction.title,
           maxLines: 2,

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ocd/self_Monitor_pages/situation_class.dart';
 
-import 'About/chapters.dart';
 import 'Exposures/exposure_data.dart';
-import 'const.dart';
-import 'custom_clipper.dart';
 import 'first_slider.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'main_onboarding_page.dart';

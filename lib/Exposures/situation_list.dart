@@ -52,7 +52,7 @@ class SituationListItem extends StatelessWidget {
                               height: 0.0,
                             )
                           : Padding(
-                              padding: EdgeInsets.only(left: 4.0),
+                              padding: const EdgeInsets.only(left: 4.0),
                               child: Icon(
                                 Icons.speaker_notes,
                                 color: Colors.grey[300],

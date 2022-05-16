@@ -27,7 +27,8 @@ class _InterventionPageState extends State<InterventionPage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => FirstInterventionPage()),
+              MaterialPageRoute(
+                  builder: (context) => const FirstInterventionPage()),
             );
           },
           child: const Text('First session'),

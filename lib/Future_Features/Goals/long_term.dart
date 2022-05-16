@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class Todo {
   Todo({@required this.name, @required this.checked});
@@ -19,7 +18,7 @@ class TodoItem extends StatelessWidget {
   TextStyle _getTextStyle(bool checked) {
     if (!checked) return null;
 
-    return TextStyle(
+    return const TextStyle(
       color: Colors.black54,
       decoration: TextDecoration.lineThrough,
     );
@@ -40,8 +39,10 @@ class TodoItem extends StatelessWidget {
 }
 
 class LongTermList extends StatefulWidget {
+  const LongTermList({Key key}) : super(key: key);
+
   @override
-  _LongTermListState createState() =>  _LongTermListState();
+  _LongTermListState createState() => _LongTermListState();
 }
 
 class _LongTermListState extends State<LongTermList> {
@@ -50,9 +51,9 @@ class _LongTermListState extends State<LongTermList> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         children: _todos.map((Todo todo) {
           return TodoItem(
             todo: todo,
@@ -63,7 +64,7 @@ class _LongTermListState extends State<LongTermList> {
       floatingActionButton: FloatingActionButton(
           onPressed: () => _displayDialog(),
           tooltip: 'Add Item',
-          child: Icon(Icons.add)),
+          child: const Icon(Icons.add)),
     );
   }
 
@@ -85,15 +86,16 @@ class _LongTermListState extends State<LongTermList> {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return KeyboardDismisser(
+        return GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
             child: AlertDialog(
               title: const Text('Add a new long term goal'),
               content: TextField(
                 controller: _textFieldController,
-                decoration: const InputDecoration(hintText: 'Type your new goal'),
+                decoration:
+                    const InputDecoration(hintText: 'Type your new goal'),
               ),
               actions: <Widget>[
-
                 TextButton(
                   child: const Text('ADD'),
                   onPressed: () {
@@ -101,17 +103,14 @@ class _LongTermListState extends State<LongTermList> {
                     _addTodoItem(_textFieldController.text);
                   },
                 ),
-
                 TextButton(
                   child: const Text('CANCEL'),
-
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 )
               ],
-            )
-        );
+            ));
       },
     );
   }

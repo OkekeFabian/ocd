@@ -7,15 +7,13 @@ class FirstInterventionErp extends StatefulWidget {
   State<FirstInterventionErp> createState() => _FirstInterventionErpState();
 }
 
-double _startValue = 1.0;
-double _endValue = 10.0;
 
 class _FirstInterventionErpState extends State<FirstInterventionErp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.all(10.0),
       alignment: Alignment.center,
       child: Column(
         children: <Widget>[

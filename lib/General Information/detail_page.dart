@@ -63,11 +63,11 @@ class DetailPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 32.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 32.0),
                     child: Text(
                       'Gallery',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Avenir',
                         fontSize: 25,
                         color: Color(0xff47455f),

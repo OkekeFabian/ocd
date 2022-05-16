@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-
 import 'package:ocd/General%20Information/main_page.dart';
-
 import 'exposure_data.dart';
 
 class QuestionPage extends StatefulWidget {
@@ -69,8 +66,8 @@ class _QuestionPageState extends State<QuestionPage> {
       body: Column(
         children: [
           Expanded(
-            child: KeyboardDismisser(
-              gestures: const [GestureType.onTap],
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Stepper(
                 type: stepperType,
                 physics: const ScrollPhysics(),
@@ -248,19 +245,20 @@ class _QuestionPageState extends State<QuestionPage> {
       ),
       floatingActionButton: Tooltip(
         message: ('Click for more info about Terms: '),
-        child: InkWell(
-          splashColor: Colors.blue.withAlpha(30),
-          onTap: () {
+        child: ElevatedButton.icon(
+          icon: const Icon(Icons.announcement),
+          style: ElevatedButton.styleFrom(
+            primary: Colors.blue, // background
+            onPrimary: Colors.white,
+          ), // foreground
+
+          onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const GeneralInfo()),
             );
           },
-          child: const FloatingActionButton(
-            child: Icon(Icons.announcement),
-
-            //onPressed: switchStepsType,
-          ),
+          label: const Text(''),
         ),
       ),
     );

@@ -58,12 +58,12 @@ class _GeneralInfoState extends State<GeneralInfo> {
             ),
             Container(
               height: 500,
-              padding: EdgeInsets.only(left: 32),
+              padding: const EdgeInsets.only(left: 32),
               child: Swiper(
                 itemCount: features.length,
                 itemWidth: MediaQuery.of(context).size.width - 2 * 64,
                 layout: SwiperLayout.STACK,
-                pagination: SwiperPagination(
+                pagination: const SwiperPagination(
                   builder: DotSwiperPaginationBuilder(
                     activeSize: 10,
                     space: 8,
@@ -118,7 +118,7 @@ class _GeneralInfoState extends State<GeneralInfo> {
                                     ),
                                     textAlign: TextAlign.left,
                                   ),
-                                  SizedBox(height: 32),
+                                  const SizedBox(height: 32),
                                   Row(
                                     children: const [
                                       Text(

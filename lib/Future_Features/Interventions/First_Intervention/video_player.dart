@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class AsserPlayerWidget extends StatefulWidget {
+  const AsserPlayerWidget({Key key}) : super(key: key);
+
   @override
   _AssetPlayerWidgetState createState() => _AssetPlayerWidgetState();
 }

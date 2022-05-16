@@ -18,8 +18,8 @@ class _FirstInterventionActState extends State<FirstInterventionAct> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.all(10.0),
-        margin: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(10.0),
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
@@ -62,11 +62,11 @@ class _FirstInterventionActState extends State<FirstInterventionAct> {
                     radius: 6,
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      Text("Metaphor");
+                      const Text("Metaphor");
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AsserPlayerWidget()),
+                            builder: (context) => const AsserPlayerWidget()),
                       );
                     },
                     child: const SizedBox(
@@ -84,9 +84,7 @@ class _FirstInterventionActState extends State<FirstInterventionAct> {
                   ),
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
-                    onTap: () {
-                      print('Card tapped.');
-                    },
+                    onTap: null,
                     child: const SizedBox(
                         width: 100,
                         height: 70,
@@ -110,11 +108,11 @@ class _FirstInterventionActState extends State<FirstInterventionAct> {
                 ],
               ),
             ),
-            ByGetXStateManagement(),
+            const ByGetXStateManagement(),
             const SizedBox(
               height: 12,
             ),
-            Text("Rate Willingness"),
+            const Text("Rate Willingness"),
             RangeSlider(
               min: 0.0,
               max: 100.0,

@@ -259,7 +259,7 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
           maxLines: 3,
           controller: resultController,
           decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               suffixIcon: resultController.text.isNotEmpty
                   ? IconButton(
                       onPressed: () => experienceController.clear(),

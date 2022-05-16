@@ -18,7 +18,7 @@ class TodoItem extends StatelessWidget {
   TextStyle _getTextStyle(bool checked) {
     if (!checked) return null;
 
-    return TextStyle(
+    return const TextStyle(
       color: Colors.black54,
       decoration: TextDecoration.lineThrough,
     );
@@ -39,8 +39,10 @@ class TodoItem extends StatelessWidget {
 }
 
 class MidTermList extends StatefulWidget {
+  const MidTermList({Key key}) : super(key: key);
+
   @override
-  _MidTermListState createState() =>  _MidTermListState();
+  _MidTermListState createState() => _MidTermListState();
 }
 
 class _MidTermListState extends State<MidTermList> {
@@ -49,9 +51,9 @@ class _MidTermListState extends State<MidTermList> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         children: _todos.map((Todo todo) {
           return TodoItem(
             todo: todo,
@@ -62,7 +64,7 @@ class _MidTermListState extends State<MidTermList> {
       floatingActionButton: FloatingActionButton(
           onPressed: () => _displayDialog(),
           tooltip: 'Add Item',
-          child: Icon(Icons.add)),
+          child: const Icon(Icons.add)),
     );
   }
 
@@ -93,7 +95,6 @@ class _MidTermListState extends State<MidTermList> {
           actions: <Widget>[
             TextButton(
               child: const Text('ADD'),
-
               onPressed: () {
                 Navigator.of(context).pop();
                 _addTodoItem(_textFieldController.text);

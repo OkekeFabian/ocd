@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'count_down_timer.dart';
 import 'package:get/get.dart';
 
 class ByGetXStateManagement extends StatefulWidget {
+  const ByGetXStateManagement({Key key}) : super(key: key);
+
   @override
   _ByGetXStateManagementState createState() => _ByGetXStateManagementState();
 }
@@ -25,10 +26,8 @@ class _ByGetXStateManagementState extends State<ByGetXStateManagement> {
       padding: const EdgeInsets.all(10.0),
       margin: const EdgeInsets.all(10.0),
       alignment: Alignment.center,
-      child: KeyboardDismisser(
-        gestures: [
-          GestureType.onTap,
-        ],
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +49,7 @@ class _ByGetXStateManagementState extends State<ByGetXStateManagement> {
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)))),
+                                  BorderRadius.all(Radius.circular(10)))),
                     )),
                 GetBuilder<CountDownTimerState>(
                     builder: (_) => Text('${TimerState.SCount}')),

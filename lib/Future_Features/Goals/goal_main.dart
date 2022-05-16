@@ -23,7 +23,7 @@ class GoalsBar extends StatelessWidget {
             ),
             title: const Text('Goals'),
           ),
-          body: TabBarView(
+          body: const TabBarView(
             children: [ShortTermList(), MidTermList(), LongTermList()],
           ),
         ),

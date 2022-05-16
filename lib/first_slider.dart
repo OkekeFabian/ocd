@@ -1,17 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:ocd/first_page_data.dart';
-import 'package:ocd/main.dart';
-import 'package:ocd/self_Monitor_pages/situation_class.dart';
 import 'About/chapters.dart';
-import 'Exposures/exposure_data.dart';
 import 'Exposures/situation_collector.dart';
 import 'const.dart';
 import 'custom_clipper.dart';
 import 'self_Monitor_pages/first_main_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class MainPageSlider extends StatefulWidget {
   const MainPageSlider({Key key}) : super(key: key);
@@ -48,7 +42,7 @@ class _MainPageSliderState extends State<MainPageSlider> {
         ClipPath(
           clipper: MyCustomClipper(clipType: ClipType.bottom),
           child: Container(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.secondary,
             height: Constants.headerHeight + statusBarHeight,
           ),
         ),

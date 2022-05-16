@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Todo {
   Todo({@required this.name, @required this.checked});
-  final String name; 
+  final String name;
   bool checked;
 }
 
@@ -18,7 +18,7 @@ class TodoItem extends StatelessWidget {
   TextStyle _getTextStyle(bool checked) {
     if (!checked) return null;
 
-    return TextStyle(
+    return const TextStyle(
       color: Colors.black54,
       decoration: TextDecoration.lineThrough,
     );
@@ -39,8 +39,10 @@ class TodoItem extends StatelessWidget {
 }
 
 class ShortTermList extends StatefulWidget {
+  const ShortTermList({Key key}) : super(key: key);
+
   @override
-  _ShortTermListState createState() =>  _ShortTermListState();
+  _ShortTermListState createState() => _ShortTermListState();
 }
 
 class _ShortTermListState extends State<ShortTermList> {
@@ -49,9 +51,9 @@ class _ShortTermListState extends State<ShortTermList> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         children: _todos.map((Todo todo) {
           return TodoItem(
             todo: todo,
@@ -62,7 +64,7 @@ class _ShortTermListState extends State<ShortTermList> {
       floatingActionButton: FloatingActionButton(
           onPressed: () => _displayDialog(),
           tooltip: 'Add Item',
-          child: Icon(Icons.add)),
+          child: const Icon(Icons.add)),
     );
   }
 

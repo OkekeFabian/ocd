@@ -18,21 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //List<WeightEntry> weightSaves = [];
-  final double _itemExtent = 50.0;
   bool isSwitched = false;
-
-  Widget _autoSwitch() {
-    return Switch(
-      value: isSwitched,
-      onChanged: (value) {
-        setState(() {
-          isSwitched = value;
-        });
-      },
-      activeTrackColor: Colors.lightGreenAccent,
-      activeColor: Colors.green,
-    );
-  }
 
   @override
   void dispose() {
