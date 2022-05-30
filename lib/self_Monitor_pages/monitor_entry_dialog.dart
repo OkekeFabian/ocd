@@ -44,23 +44,6 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
   ];
 
   @override
-  void initState() {
-    super.initState();
-
-    if (widget.weightEntry != null) {
-      final situation = widget.weightEntry;
-
-      experienceController.text = situation.experience;
-      responseController.text = situation.response;
-      resultController.text = situation.result;
-      _dateTime = situation.dateTime;
-      _rating = situation.rating;
-    } else {
-      _rating = 0;
-    }
-  }
-
-  @override
   void dispose() {
     experienceController.dispose();
     responseController.dispose();
