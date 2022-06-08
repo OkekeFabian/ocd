@@ -52,6 +52,21 @@ class _WeightEntryDialogState extends State<WeightEntryDialog> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    if (widget.weightEntry != null) {
+      final weightEntryEdit = widget.weightEntry;
+
+      experienceController.text = weightEntryEdit.experience;
+      responseController.text = weightEntryEdit.response;
+      resultController.text = weightEntryEdit.result;
+      _rating = weightEntryEdit.rating;
+      _dateTime = weightEntryEdit.dateTime;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
